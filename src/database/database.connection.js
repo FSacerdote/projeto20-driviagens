@@ -10,4 +10,4 @@ const config = {
 
 if(process.env.NODE_ENV === "production") config.ssl = true
 
-export const db = Pool(config)
+export const db = new Pool(config)
