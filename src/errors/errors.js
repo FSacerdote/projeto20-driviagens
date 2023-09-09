@@ -5,10 +5,10 @@ function format (message){
   }
 }
 
-function conflict (resource = "Item"){
+function conflict (message){
   return {
     type: "conflict",
-    message: `${resource} já existe!`
+    message
   }
 }
 

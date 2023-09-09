@@ -43,3 +43,5 @@ export function selectFlight(origin, destination){
     ORDER BY f.date;
     `)
 }
+
+export const flightRepository = { searchFlight, insertFlight, selectFlight}

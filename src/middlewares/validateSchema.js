@@ -1,9 +1,12 @@
+import { errors } from "../errors/errors.js"
+
 export default function validateSchema (schema) {
   return (req,res,next)=>{
       const schemaValidation = schema.validate(req.body, {abortEarly: false})
       if(schemaValidation.error){
-          const errors = schemaValidation.error.details.map((detail)=> detail.message)
-          return res.status(422).send(errors)
+          let errorMessage = ""
+          schemaValidation.error.details.forEach((detail) => errorMessage += detail.message + " ")
+          throw errors.format(errorMessage)
       }
       next()
   }
