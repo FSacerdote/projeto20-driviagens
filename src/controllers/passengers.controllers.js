@@ -1,22 +1,14 @@
-import { insertPassenger, selectPassengers } from "../repositories/passengers.respository.js"
+import httpStatus from "http-status"
+import { passengersService } from "../services/passengers.services.js"
 
 export async function postPassenger(req, res){
   const {firstName, lastName} = req.body
-  try {
-    await insertPassenger(firstName, lastName)
-    res.sendStatus(201)
-  } catch (error) {
-    res.status(500).send(error.message)
-  }
+  await passengersService.post(firstName, lastName)
+  res.sendStatus(httpStatus.CREATED)
 }
 
 export async function getPassengersTravels(req, res){
   const {name} = req.query
-  try {
-    const passengerQuery = await selectPassengers(name?name:"");
-    if(passengerQuery.rowCount > 10) return res.status(500).send("Too many requests")
-    res.send(passengerQuery.rows)
-  } catch (error) {
-    res.status(500).send(error.message)
-  }
+  const passengers = await passengersService.get(name)
+  res.send(passengers)
 }

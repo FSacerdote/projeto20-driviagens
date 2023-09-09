@@ -1,10 +1,10 @@
 import { db } from "../database/database.connection.js";
 
-export async function insertPassenger(firstName, lastName){{
+function insertPassenger(firstName, lastName){{
   return db.query(`INSERT INTO passengers ("firstName", "lastName") VALUES ($1, $2)`, [firstName, lastName])
 }}
 
-export async function selectPassengers(name){
+function selectPassengers(name){
   return db.query(`
     SELECT (p."firstName" || ' ' || p."lastName") AS passenger, COUNT(t.id) AS travels 
     FROM passengers p 
@@ -15,3 +15,5 @@ export async function selectPassengers(name){
     LIMIT 10;
   `, [name])
 }
+
+export const passengerRepository = {insertPassenger, selectPassengers}

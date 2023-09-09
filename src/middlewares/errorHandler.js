@@ -18,6 +18,10 @@ export function errorHandler(error, req, res, next){
     return res.status(httpStatus.UNPROCESSABLE_ENTITY).send(error.message)
   }
 
+  if(error.type === "tooMany"){
+    return res.status(httpStatus.INTERNAL_SERVER_ERROR).send(error.message)
+  }
+
   console.log(error)
   res.status(httpStatus.INTERNAL_SERVER_ERROR).send("Ocorrreu um erro desconhecido!")
 }

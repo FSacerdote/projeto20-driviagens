@@ -26,6 +26,13 @@ function badRequest (){
   }
 }
 
+function tooMany (){
+  return{
+    type: "tooMany",
+    message: "Too many requests"
+  }
+}
+
 export const errors = {
-  format, conflict, notFound, badRequest
+  format, conflict, notFound, badRequest, tooMany
 }
