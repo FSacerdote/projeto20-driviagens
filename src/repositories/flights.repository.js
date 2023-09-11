@@ -5,7 +5,7 @@ function searchFlight(id){
 }
 
 function insertFlight(origin, destination, date){
-  return db.query(`INSERT INTO flights (origin, destination, date) VALUES ($1, $2, $3);`, [origin, destination, date])
+  return db.query(`INSERT INTO flights (origin, destination, date) VALUES ($1, $2, TO_DATE($3, 'DD-MM-YYYY'));`, [origin, destination, date])
 }
 
 function selectFlight(origin, destination){
